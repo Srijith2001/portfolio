@@ -1,7 +1,6 @@
 import { useState, type FormEvent } from 'react';
 import githubIcon from '../../assets/images/github.png';
 import gmailIcon from '../../assets/images/gmail.png';
-import instagramIcon from '../../assets/images/instagram.png';
 import linkedinIcon from '../../assets/images/linkedin.png';
 import whatsappIcon from '../../assets/images/whatsapp.png';
 import './Contact.css';
@@ -46,7 +45,7 @@ const Contact = () => {
         { name: 'GitHub', url: 'https://github.com/Srijith2001', icon: githubIcon },
         { name: 'LinkedIn', url: 'http://www.linkedin.com/in/srijith-bharadwaj-d', icon: linkedinIcon },
         { name: 'Gmail', url: 'mailto:srijithbharadwajd@gmail.com', icon: gmailIcon },
-        { name: 'Instagram', url: 'https://www.instagram.com/srijith_bharadwaj', icon: instagramIcon },
+        // { name: 'Instagram', url: 'https://www.instagram.com/srijith_bharadwaj', icon: instagramIcon },
         { name: 'WhatsApp', url: 'https://wa.me/918754113045', icon: whatsappIcon }
     ];
 

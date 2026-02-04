@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import githubIcon from '../../assets/images/github.png';
 import gmailIcon from '../../assets/images/gmail.png';
 import profileImage from '../../assets/images/img_2.jpg';
-import instagramIcon from '../../assets/images/instagram.png';
 import linkedinIcon from '../../assets/images/linkedin.png';
 import whatsappIcon from '../../assets/images/whatsapp.png';
 import resumePdf from '../../assets/pdfs/resume.pdf';
@@ -20,7 +19,7 @@ const Hero = () => {
         { name: 'GitHub', url: 'https://github.com/Srijith2001', icon: githubIcon },
         { name: 'LinkedIn', url: 'http://www.linkedin.com/in/srijith-bharadwaj-d', icon: linkedinIcon },
         { name: 'Gmail', url: `mailto:${email}`, icon: gmailIcon },
-        { name: 'Instagram', url: 'https://www.instagram.com/srijith_bharadwaj', icon: instagramIcon },
+        // { name: 'Instagram', url: 'https://www.instagram.com/srijith_bharadwaj', icon: instagramIcon },
         { name: 'WhatsApp', url: 'https://wa.me/918754113045', icon: whatsappIcon }
     ];
 
