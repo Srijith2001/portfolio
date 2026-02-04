@@ -1,0 +1,116 @@
+.education {
+    padding: 6rem 0;
+}
+
+.education__header {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.education__title {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.education__subtitle {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+}
+
+.education__card {
+    max-width: 700px;
+    margin: 0 auto;
+    background: var(--bg-card);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    padding: 3rem;
+    text-align: center;
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+    transition: all 0.6s ease;
+}
+
+.education__card--visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+.education__card:hover {
+    background: var(--bg-card-hover);
+    border-color: rgba(99, 102, 241, 0.3);
+    box-shadow: var(--glow-primary);
+}
+
+.education__icon {
+    font-size: 4rem;
+    margin-bottom: 1.5rem;
+}
+
+.education__degree {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 0.75rem;
+}
+
+.education__institution {
+    font-size: 1.2rem;
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+}
+
+.education__stats {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+}
+
+.education__stat {
+    text-align: center;
+}
+
+.education__stat-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--accent-primary);
+}
+
+.education__stat-label {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+.education__publication {
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border-color);
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.8;
+}
+
+@media (max-width: 768px) {
+    .education {
+        padding: 4rem 1rem;
+    }
+
+    .education__card {
+        padding: 2rem 1.5rem;
+        margin: 0 1rem;
+    }
+
+    .education__degree {
+        font-size: 1.25rem;
+    }
+
+    .education__stats {
+        gap: 2rem;
+    }
+}
