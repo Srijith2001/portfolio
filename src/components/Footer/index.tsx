@@ -42,13 +42,6 @@ const Footer = () => {
                         </a>
                     ))}
                 </div>
-
-                <p className="footer__copyright">
-                    Built with <span className="footer__heart">❤️</span> using React & TypeScript
-                </p>
-                <p className='footer__copyright'>
-                    © {new Date().getFullYear()} Srijith Bharadwaj D
-                </p>
             </div>
         </footer>
     );
