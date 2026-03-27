@@ -1,66 +1,78 @@
-import { useEffect, useRef, useState } from 'react';
+import { motion } from 'framer-motion';
 import { resumeData } from '../../resumeData';
 import './Skills.css';
 
+const languageStats = [
+  { name: 'JavaScript', color: '#f1e05a', percent: 40 },
+  { name: 'Go', color: '#00ADD8', percent: 30 },
+  { name: 'TypeScript', color: '#3178c6', percent: 15 },
+  { name: 'Java', color: '#b07219', percent: 10 },
+  { name: 'C++', color: '#f34b7d', percent: 5 },
+];
+
+const skillCategories = [
+  { label: 'Mobile & Frontend', items: resumeData.skills.mobileFrontend },
+  { label: 'Backend', items: resumeData.skills.backend },
+  { label: 'Databases & Messaging', items: resumeData.skills.databasesMessaging },
+  { label: 'Tools & Cloud', items: resumeData.skills.toolsCloud },
+];
+
 const Skills = () => {
-    const sectionRef = useRef<HTMLDivElement>(null);
-    const [isVisible, setIsVisible] = useState(false);
+  return (
+    <section id="skills" className="skills-section">
+      <div className="container">
+        <p className="section-label">Languages & Technologies</p>
+        <h2 className="section-title">Skills Overview</h2>
 
-    useEffect(() => {
-        const observer = new IntersectionObserver(
-            (entries) => {
-                if (entries[0].isIntersecting) {
-                    setIsVisible(true);
-                }
-            },
-            { threshold: 0.2 }
-        );
+        {/* GitHub Language Bar */}
+        <div className="gh-lang-section">
+          <h3 className="gh-lang-title">Languages</h3>
+          <div className="gh-lang-bar">
+            {languageStats.map((lang, i) => (
+              <motion.div
+                key={i}
+                className="gh-lang-segment"
+                style={{ backgroundColor: lang.color }}
+                initial={{ width: 0 }}
+                whileInView={{ width: `${lang.percent}%` }}
+                viewport={{ once: true, margin: '-50px' }}
+                transition={{ duration: 0.8, delay: i * 0.1, ease: 'easeOut' }}
+              />
+            ))}
+          </div>
+          <div className="gh-lang-legend">
+            {languageStats.map((lang, i) => (
+              <div key={i} className="gh-lang-item">
+                <span className="gh-lang-dot" style={{ backgroundColor: lang.color }} />
+                <span className="gh-lang-name">{lang.name}</span>
+                <span className="gh-lang-percent">{lang.percent}%</span>
+              </div>
+            ))}
+          </div>
+        </div>
 
-        if (sectionRef.current) {
-            observer.observe(sectionRef.current);
-        }
-
-        return () => observer.disconnect();
-    }, []);
-
-    const categoryMeta: { [key: string]: { icon: string; title: string } } = {
-        languages: { icon: '💻', title: 'Languages' },
-        mobileFrontend: { icon: '📱', title: 'Mobile & Frontend' },
-        backend: { icon: '⚙️', title: 'Backend' },
-        databasesMessaging: { icon: '🗄️', title: 'Databases & Messaging' },
-        toolsCloud: { icon: '☁️', title: 'Tools & Cloud' }
-    };
-
-    return (
-        <section id="skills" className="skills" ref={sectionRef}>
-            <div className="skills__container">
-                <div className="skills__header">
-                    <h2 className="skills__title">
-                        <span className="gradient-text">Technical Skills</span>
-                    </h2>
-                    <p className="skills__subtitle">Technologies I work with every day</p>
-                </div>
-
-                <div className="skills__grid">
-                    {Object.entries(resumeData.skills).map(([key, items], index) => (
-                        <div
-                            key={key}
-                            className={`skills__category ${isVisible ? 'skills__category--visible' : ''}`}
-                            style={{ transitionDelay: `${index * 100}ms` }}
-                        >
-                            <div className="skills__category-icon">{categoryMeta[key]?.icon}</div>
-                            <h3 className="skills__category-title">{categoryMeta[key]?.title}</h3>
-                            <div className="skills__list">
-                                {items.map((skill, i) => (
-                                    <span key={i} className="skills__item">{skill}</span>
-                                ))}
-                            </div>
-                        </div>
-                    ))}
-                </div>
-            </div>
-        </section>
-    );
+        <div className="skills-grid">
+          {skillCategories.map((cat, i) => (
+            <motion.div
+              key={i}
+              className="skill-category"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-30px' }}
+              transition={{ duration: 0.4, delay: i * 0.08 }}
+            >
+              <h3 className="cat-label">{cat.label}</h3>
+              <div className="chip-group">
+                {cat.items.map((skill, j) => (
+                  <span key={j} className="gh-label">{skill}</span>
+                ))}
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
 };
 
 export default Skills;

@@ -1,64 +1,52 @@
-import { useEffect, useRef, useState } from 'react';
+import { motion } from 'framer-motion';
 import { resumeData } from '../../resumeData';
 import './Education.css';
 
 const Education = () => {
-    const sectionRef = useRef<HTMLDivElement>(null);
-    const [isVisible, setIsVisible] = useState(false);
-    const { degree, institution, gpa, timeline, publications } = resumeData.education;
+  const edu = resumeData.education;
 
-    useEffect(() => {
-        const observer = new IntersectionObserver(
-            (entries) => {
-                if (entries[0].isIntersecting) {
-                    setIsVisible(true);
-                }
-            },
-            { threshold: 0.3 }
-        );
+  return (
+    <section id="education">
+      <div className="container">
+        <p className="section-label">Academic Background</p>
+        <h2 className="section-title">Education</h2>
 
-        if (sectionRef.current) {
-            observer.observe(sectionRef.current);
-        }
-
-        return () => observer.disconnect();
-    }, []);
-
-    return (
-        <section id="education" className="education container" ref={sectionRef}>
-            <div className="education__header">
-                <h2 className="education__title">
-                    <span className="gradient-text">Education</span>
-                </h2>
-                <p className="education__subtitle">Academic foundation and research</p>
+        <motion.div
+          className="gh-pinned-repo card"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+        >
+          <div className="gh-repo-header">
+            <div className="gh-repo-title-group">
+              <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" className="gh-repo-icon">
+                <path fill="currentColor" fillRule="evenodd" d="M2 2.5A2.5 2.5 0 014.5 0h8.75a.75.75 0 01.75.75v12.5a.75.75 0 01-.75.75h-2.5a.75.75 0 110-1.5h1.75v-2h-8a1 1 0 00-.714 1.7.75.75 0 01-1.072 1.05A2.495 2.495 0 012 11.5v-9zm10.5-1V9h-8c-.356 0-.694.074-1 .208V2.5a1 1 0 011-1h8zM5 12.25v3.25a.25.25 0 00.4.2l1.45-1.087a.25.25 0 01.3 0L8.6 15.7a.25.25 0 00.4-.2v-3.25a.25.25 0 00-.25-.25h-3.5a.25.25 0 00-.25.25z"></path>
+              </svg>
+              <h3 className="gh-repo-name">{edu.degree}</h3>
+              <span className="gh-repo-badge">Public</span>
             </div>
+          </div>
 
-            <div className={`education__card ${isVisible ? 'education__card--visible' : ''}`}>
-                <div className="education__icon">🎓</div>
-                <h3 className="education__degree">{degree}</h3>
-                <div className="education__institution">{institution}</div>
+          <p className="gh-repo-desc">{edu.institution} • {edu.timeline}</p>
+          <p className="gh-repo-desc">{edu.publications}</p>
 
-                <div className="education__stats">
-                    <div className="education__stat">
-                        <div className="education__stat-value">{gpa}</div>
-                        <div className="education__stat-label">GPA</div>
-                    </div>
-                    <div className="education__stat">
-                        <div className="education__stat-value">{timeline.split(' – ')[1]}</div>
-                        <div className="education__stat-label">Graduated</div>
-                    </div>
-                    <div className="education__stat">
-                        <div className="education__stat-value">2</div>
-                        <div className="education__stat-label">Publications</div>
-                    </div>
-                </div>
-
-                <div className="education__publication">
-                    <span>📄</span> {publications}
-                </div>
-            </div>
-        </section>
-    );
+          <div className="gh-repo-meta">
+            <span className="gh-repo-stat">
+              <span className="gh-lang-color" style={{ backgroundColor: '#238636' }}></span>
+              GPA {edu.gpa}
+            </span>
+            <span className="gh-repo-stat">
+              <svg aria-label="star" role="img" height="16" viewBox="0 0 16 16" version="1.1" width="16" className="gh-star-icon">
+                <path fill="currentColor" fillRule="evenodd" d="M8 .25a.75.75 0 01.673.418l1.882 3.815 4.21.612a.75.75 0 01.416 1.279l-3.046 2.97.719 4.192a.75.75 0 01-1.088.791L8 12.347l-3.766 1.98a.75.75 0 01-1.088-.79l.72-4.194L.818 6.374a.75.75 0 01.416-1.28l4.21-.611L7.327.668A.75.75 0 018 .25zm0 2.445L6.615 5.5a.75.75 0 01-.564.41l-3.097.45 2.24 2.184a.75.75 0 01.216.664l-.528 3.084 2.769-1.456a.75.75 0 01.698 0l2.77 1.456-.53-3.084a.75.75 0 01.216-.664l2.24-2.183-3.096-.45a.75.75 0 01-.564-.41L8 2.694v.001z"></path>
+              </svg>
+              Honors
+            </span>
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  );
 };
 
 export default Education;

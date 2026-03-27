@@ -1,6 +1,7 @@
 export const resumeData = {
   personalInfo: {
     name: "SRIJITH BHARADWAJ D",
+    title: "Software Engineer",
     location: "Trichy, Tamil Nadu",
     phone: "8754113045",
     email: "srijithbharadwajd@gmail.com",
@@ -19,6 +20,7 @@ export const resumeData = {
       company: "Swiggy",
       role: "Software Engineer 1",
       period: "April 2024 – Present",
+      techStack: ["React Native", "Expo", "Golang", "Quarkus", "Kafka", "Redis", "SQL"],
       achievements: [
         {
           title: "Tezz (Retailer App)",
@@ -46,6 +48,7 @@ export const resumeData = {
       company: "Swiggy",
       role: "Associate Software Dev Engineer",
       period: "July 2022 – March 2024",
+      techStack: ["React.js", "TypeScript", "Redux", "HTML/CSS"],
       achievements: [
         {
           title: "UI Development",
@@ -61,6 +64,7 @@ export const resumeData = {
       company: "Lynk Logistics (Acquired By Swiggy)",
       role: "Software Developer Intern",
       period: "Feb 2022 – Jun 2022",
+      techStack: ["React.js", "Golang", "Microservices", "MongoDB"],
       achievements: [
         {
           title: "On-Demand Logistics Platform",

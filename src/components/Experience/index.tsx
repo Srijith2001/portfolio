@@ -1,73 +1,69 @@
-import { useEffect, useRef } from 'react';
+import { motion } from 'framer-motion';
 import { resumeData } from '../../resumeData';
 import './Experience.css';
 
+const fadeUp = {
+  initial: { opacity: 0, y: 30 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true, margin: '-50px' },
+  transition: { duration: 0.5 }
+};
+
 const Experience = () => {
-    const sectionRef = useRef<HTMLDivElement>(null);
+  return (
+    <section id="experience">
+      <div className="container">
+        <p className="section-label">Where I've Worked</p>
+        <h2 className="section-title">Experience</h2>
 
-    useEffect(() => {
-        const observer = new IntersectionObserver(
-            (entries) => {
-                entries.forEach((entry) => {
-                    if (entry.isIntersecting) {
-                        const items = entry.target.querySelectorAll('.experience__job');
-                        items.forEach((item, index) => {
-                            setTimeout(() => {
-                                item.classList.add('experience__job--visible');
-                            }, index * 200);
-                        });
-                    }
-                });
-            },
-            { threshold: 0.1 }
-        );
+        <div className="timeline">
+          {resumeData.experience.map((job, i) => (
+            <motion.div key={i} className="timeline-item" {...fadeUp}>
+              <div className="timeline-marker">
+                <div className="gh-commit-icon">
+                  <svg viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
+                    <path fillRule="evenodd" d="M10.5 7.75a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0zm1.43.75a4.002 4.002 0 01-7.86 0H.75a.75.75 0 110-1.5h3.32a4.001 4.001 0 017.86 0h3.32a.75.75 0 110 1.5h-3.32z"></path>
+                  </svg>
+                </div>
+                {i < resumeData.experience.length - 1 && <div className="marker-line" />}
+              </div>
 
-        if (sectionRef.current) {
-            observer.observe(sectionRef.current);
-        }
+              <div className="timeline-content card gh-timeline-card">
+                <div className="job-header">
+                  <div>
+                    <h3 className="job-company">
+                      {job.role} <span className="gh-tag">at {job.company}</span>
+                    </h3>
+                    <p className="job-period">committed {job.period}</p>
+                  </div>
+                  <div className="gh-commit-hash">
+                    {Math.random().toString(16).substring(2, 9)}
+                  </div>
+                </div>
 
-        return () => observer.disconnect();
-    }, []);
-
-    return (
-        <section id="experience" className="experience container" ref={sectionRef}>
-            <div className="experience__header">
-                <h2 className="experience__title">
-                    <span className="gradient-text">Work Experience</span>
-                </h2>
-                <p className="experience__subtitle">My professional journey building scalable systems</p>
-            </div>
-
-            <div className="experience__timeline">
-                <div className="experience__timeline-line"></div>
-
-                {resumeData.experience.map((job, index) => (
-                    <div key={index} className="experience__job">
-                        <div className="experience__dot"></div>
-                        <div className="experience__card">
-                            <h3 className="experience__role">{job.role}</h3>
-                            <div className="experience__company">@ {job.company}</div>
-                            <div className="experience__period">
-                                <span>📅</span> {job.period}
-                            </div>
-
-                            <div className="experience__achievements">
-                                {job.achievements.map((item, i) => (
-                                    <div key={i} className="experience__achievement">
-                                        <span className="experience__achievement-icon">▹</span>
-                                        <div>
-                                            <div className="experience__achievement-title">{item.title}</div>
-                                            <p className="experience__achievement-desc">{item.description}</p>
-                                        </div>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
+                <div className="achievements">
+                  {job.achievements.map((ach, j) => (
+                    <div key={j} className="achievement gh-achievement">
+                      <span className="ach-title">{ach.title}</span>
+                      <p className="ach-desc">{ach.description}</p>
                     </div>
-                ))}
-            </div>
-        </section>
-    );
+                  ))}
+                </div>
+
+                {job.techStack && (
+                  <div className="gh-tech-stack">
+                    {job.techStack.map((tech, j) => (
+                      <span key={j} className="gh-label gh-label-small">{tech}</span>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
 };
 
 export default Experience;

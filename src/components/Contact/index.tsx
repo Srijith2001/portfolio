@@ -1,169 +1,79 @@
-import { useState, type FormEvent } from 'react';
-import githubIcon from '../../assets/images/github.png';
-import gmailIcon from '../../assets/images/gmail.png';
-import linkedinIcon from '../../assets/images/linkedin.png';
-import whatsappIcon from '../../assets/images/whatsapp.png';
+import { useState } from 'react';
+import { motion } from 'framer-motion';
+import { resumeData } from '../../resumeData';
 import './Contact.css';
 
 const Contact = () => {
-    const [formData, setFormData] = useState({
-        name: '',
-        email: '',
-        subject: '',
-        message: ''
-    });
-    const [isSubmitting, setIsSubmitting] = useState(false);
-    const [isSubmitted, setIsSubmitted] = useState(false);
+  const info = resumeData.personalInfo;
+  const [title, setTitle] = useState('');
+  const [body, setBody] = useState('');
 
-    const handleSubmit = async (e: FormEvent) => {
-        e.preventDefault();
-        setIsSubmitting(true);
+  const handleMailTo = () => {
+    window.location.href = `mailto:${info.email}?subject=${encodeURIComponent(title)}&body=${encodeURIComponent(body)}`;
+  };
 
-        // Create mailto link with form data
-        const mailtoLink = `mailto:srijithbharadwajd@gmail.com?subject=${encodeURIComponent(formData.subject)}&body=${encodeURIComponent(
-            `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
-        )}`;
+  return (
+    <section id="contact" className="contact-section">
+      <div className="container">
+        <motion.div
+          className="gh-issue-form-container"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
+          <div className="gh-issue-header">
+            <h2 className="gh-issue-title">Open a new issue</h2>
+            <p className="gh-issue-sub">Connect with me for a project or collaboration.</p>
+          </div>
 
-        window.location.href = mailtoLink;
-
-        // Show success state
-        setTimeout(() => {
-            setIsSubmitting(false);
-            setIsSubmitted(true);
-            setTimeout(() => setIsSubmitted(false), 3000);
-        }, 500);
-    };
-
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        setFormData(prev => ({
-            ...prev,
-            [e.target.name]: e.target.value
-        }));
-    };
-
-    const socialLinks = [
-        { name: 'GitHub', url: 'https://github.com/Srijith2001', icon: githubIcon },
-        { name: 'LinkedIn', url: 'http://www.linkedin.com/in/srijith-bharadwaj-d', icon: linkedinIcon },
-        { name: 'Gmail', url: 'mailto:srijithbharadwajd@gmail.com', icon: gmailIcon },
-        // { name: 'Instagram', url: 'https://www.instagram.com/srijith_bharadwaj', icon: instagramIcon },
-        { name: 'WhatsApp', url: 'https://wa.me/918754113045', icon: whatsappIcon }
-    ];
-
-    if (isSubmitted) {
-        return (
-            <section id="contact" className="contact">
-                <div className="contact__container">
-                    <div className="contact__header">
-                        <h2 className="contact__title">
-                            <span className="gradient-text">Get In Touch</span>
-                        </h2>
-                    </div>
-                    <div className="contact__form">
-                        <div className="contact__success">
-                            <span className="contact__success-icon">✅</span>
-                            Opening your email client... Thanks for reaching out!
-                        </div>
-                    </div>
-                </div>
-            </section>
-        );
-    }
-
-    return (
-        <section id="contact" className="contact">
-            <div className="contact__container">
-                <div className="contact__header">
-                    <h2 className="contact__title">
-                        <span className="gradient-text">Get In Touch</span>
-                    </h2>
-                    <p className="contact__subtitle">Have a project in mind? Let's talk about it.</p>
-                </div>
-
-                <div className="contact__content">
-                    <form className="contact__form" onSubmit={handleSubmit}>
-                        <div className="contact__form-row">
-                            <div className="contact__form-group">
-                                <label className="contact__label" htmlFor="name">Your Name</label>
-                                <input
-                                    type="text"
-                                    id="name"
-                                    name="name"
-                                    className="contact__input"
-                                    placeholder="John Doe"
-                                    value={formData.name}
-                                    onChange={handleChange}
-                                    required
-                                />
-                            </div>
-                            <div className="contact__form-group">
-                                <label className="contact__label" htmlFor="email">Your Email</label>
-                                <input
-                                    type="email"
-                                    id="email"
-                                    name="email"
-                                    className="contact__input"
-                                    placeholder="john@example.com"
-                                    value={formData.email}
-                                    onChange={handleChange}
-                                    required
-                                />
-                            </div>
-                        </div>
-
-                        <div className="contact__form-group contact__form-group--full">
-                            <label className="contact__label" htmlFor="subject">Subject</label>
-                            <input
-                                type="text"
-                                id="subject"
-                                name="subject"
-                                className="contact__input"
-                                placeholder="Project Inquiry"
-                                value={formData.subject}
-                                onChange={handleChange}
-                                required
-                            />
-                        </div>
-
-                        <div className="contact__form-group contact__form-group--full">
-                            <label className="contact__label" htmlFor="message">Message</label>
-                            <textarea
-                                id="message"
-                                name="message"
-                                className="contact__textarea"
-                                placeholder="Tell me about your project..."
-                                value={formData.message}
-                                onChange={handleChange}
-                                required
-                            />
-                        </div>
-
-                        <button type="submit" className="contact__submit" disabled={isSubmitting}>
-                            {isSubmitting ? 'Sending...' : 'Send Message 🚀'}
-                        </button>
-                    </form>
-
-                    <div className="contact__social">
-                        <h3 className="contact__social-title">Or connect with me on</h3>
-                        <div className="contact__social-links">
-                            {socialLinks.map((link) => (
-                                <a
-                                    key={link.name}
-                                    href={link.url}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="contact__social-link"
-                                    title={link.name}
-                                >
-                                    <img src={link.icon} alt={link.name} className="contact__social-icon" />
-                                    <span className="contact__social-name">{link.name}</span>
-                                </a>
-                            ))}
-                        </div>
-                    </div>
-                </div>
+          <div className="gh-issue-layout">
+            <div className="gh-issue-avatar">
+              <svg aria-hidden="true" height="40" viewBox="0 0 16 16" version="1.1" width="40" data-view-component="true" style={{ color: "var(--text-muted)" }}>
+                  <path fillRule="evenodd" d="M10.561 8.073a6.005 6.005 0 013.432 5.142.75.75 0 11-1.498.07 4.5 4.5 0 00-8.99 0 .75.75 0 01-1.498-.07 6.004 6.004 0 013.431-5.142 3.999 3.999 0 115.123 0zM10.5 5a2.5 2.5 0 10-5 0 2.5 2.5 0 005 0z" fill="currentColor"></path>
+              </svg>
             </div>
-        </section>
-    );
+            
+            <div className="gh-issue-box">
+              <div className="gh-issue-input-group">
+                <input 
+                  type="text" 
+                  className="gh-input-title" 
+                  placeholder="Title" 
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}
+                />
+              </div>
+
+              <div className="gh-issue-body-group">
+                <div className="gh-tab-nav">
+                  <button className="gh-tab active">Write</button>
+                  <button className="gh-tab">Preview</button>
+                </div>
+                
+                <div className="gh-textarea-wrapper">
+                  <textarea 
+                    className="gh-textarea" 
+                    placeholder="Leave a comment"
+                    value={body}
+                    onChange={(e) => setBody(e.target.value)}
+                  />
+                  <div className="gh-textarea-footer">
+                    <span>Markdown is supported</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="gh-issue-actions">
+                <a href={info.linkedin} target="_blank" rel="noreferrer" className="btn-secondary">View LinkedIn</a>
+                <button onClick={handleMailTo} className="btn-primary">Submit new issue</button>
+              </div>
+            </div>
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  );
 };
 
 export default Contact;
