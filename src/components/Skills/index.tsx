@@ -21,17 +21,16 @@ const Skills = () => {
   return (
     <section id="skills" className="skills-section">
       <div className="container">
-        <p className="section-label">Languages & Technologies</p>
+        <span className="section-label">Languages & Technologies</span>
         <h2 className="section-title">Skills Overview</h2>
 
-        {/* GitHub Language Bar */}
-        <div className="gh-lang-section">
-          <h3 className="gh-lang-title">Languages</h3>
-          <div className="gh-lang-bar">
+        <div className="lang-section">
+          <h3 className="lang-title">Language Distribution</h3>
+          <div className="lang-bar">
             {languageStats.map((lang, i) => (
               <motion.div
                 key={i}
-                className="gh-lang-segment"
+                className="lang-segment"
                 style={{ backgroundColor: lang.color }}
                 initial={{ width: 0 }}
                 whileInView={{ width: `${lang.percent}%` }}
@@ -40,12 +39,12 @@ const Skills = () => {
               />
             ))}
           </div>
-          <div className="gh-lang-legend">
+          <div className="lang-legend">
             {languageStats.map((lang, i) => (
-              <div key={i} className="gh-lang-item">
-                <span className="gh-lang-dot" style={{ backgroundColor: lang.color }} />
-                <span className="gh-lang-name">{lang.name}</span>
-                <span className="gh-lang-percent">{lang.percent}%</span>
+              <div key={i} className="lang-item">
+                <span className="lang-dot" style={{ backgroundColor: lang.color }} />
+                <span className="lang-name">{lang.name}</span>
+                <span className="lang-percent">{lang.percent}%</span>
               </div>
             ))}
           </div>
@@ -64,7 +63,7 @@ const Skills = () => {
               <h3 className="cat-label">{cat.label}</h3>
               <div className="chip-group">
                 {cat.items.map((skill, j) => (
-                  <span key={j} className="gh-label">{skill}</span>
+                  <span key={j} className="chip skill-chip">{skill}</span>
                 ))}
               </div>
             </motion.div>

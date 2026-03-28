@@ -1,76 +1,85 @@
-.gh-pinned-repo {
-  max-width: 500px;
+.edu-card {
+  padding: var(--space-2xl);
+  margin-top: var(--space-xl);
   display: flex;
   flex-direction: column;
+  gap: var(--space-md);
 }
 
-.gh-repo-header {
+.edu-header {
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  margin-bottom: 0.5rem;
+  align-items: center;
+  margin-bottom: var(--space-xs);
 }
 
-.gh-repo-title-group {
+.edu-title-group {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: var(--space-md);
 }
 
-.gh-repo-icon {
-  color: var(--text-muted);
+.edu-icon {
+  color: var(--color-cta);
 }
 
-.gh-repo-name {
-  color: var(--accent);
+.edu-name {
+  font-family: 'Archivo', sans-serif;
+  font-size: 1.5rem;
+  color: var(--color-cta);
+  margin: 0;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.edu-badge {
+  color: var(--color-cta);
+  border-color: var(--color-cta);
+  background: rgba(34, 197, 94, 0.1);
+}
+
+.edu-desc {
   font-size: 1rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.edu-desc strong {
+  color: var(--color-text);
   font-weight: 600;
-  cursor: pointer;
 }
 
-.gh-repo-name:hover {
-  text-decoration: underline;
+.edu-meta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-lg);
+  margin-top: var(--space-md);
+  padding-top: var(--space-md);
+  border-top: 1px dashed var(--border);
 }
 
-.gh-repo-badge {
-  color: var(--text-muted);
-  border: 1px solid var(--border);
-  border-radius: 2em;
-  padding: 0 7px;
-  font-size: 12px;
+.edu-stat {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.9rem;
+  color: var(--text-dim);
   font-weight: 500;
-  line-height: ১৮px;
 }
 
-.gh-repo-desc {
-  font-size: 0.85rem;
-  color: var(--text-muted);
-  margin-bottom: 0.5rem;
-  line-height: 1.5;
-}
-
-.gh-repo-meta {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  margin-top: 1rem;
-  font-size: 0.8rem;
+.edu-stat svg {
   color: var(--text-muted);
 }
 
-.gh-repo-stat {
-  display: flex;
-  align-items: center;
-  gap: 0.3rem;
+.edu-star {
+  color: #FACC15 !important;
+  fill: rgba(250, 204, 21, 0.2);
 }
 
-.gh-lang-color {
-  display: inline-block;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-}
-
-.gh-star-icon {
-  color: var(--text-muted);
+@media (max-width: 640px) {
+  .edu-title-group {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-xs);
+  }
 }

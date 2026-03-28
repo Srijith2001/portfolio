@@ -1,7 +1,26 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
+import { Send, Mail } from 'lucide-react';
 import { resumeData } from '../../resumeData';
 import './Contact.css';
+
+const LinkedinIcon = ({ size = 24 }: { size?: number }) => (
+  <svg 
+    xmlns="http://www.w3.org/2000/svg" 
+    width={size} 
+    height={size} 
+    viewBox="0 0 24 24" 
+    fill="none" 
+    stroke="currentColor" 
+    strokeWidth="2" 
+    strokeLinecap="round" 
+    strokeLinejoin="round"
+  >
+    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+    <rect width="4" height="12" x="2" y="9" />
+    <circle cx="4" cy="4" r="2" />
+  </svg>
+);
 
 const Contact = () => {
   const info = resumeData.personalInfo;
@@ -15,58 +34,62 @@ const Contact = () => {
   return (
     <section id="contact" className="contact-section">
       <div className="container">
+        <span className="section-label">Get In Touch</span>
+        <h2 className="section-title">Contact Me</h2>
+
         <motion.div
-          className="gh-issue-form-container"
+          className="contact-card card"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <div className="gh-issue-header">
-            <h2 className="gh-issue-title">Open a new issue</h2>
-            <p className="gh-issue-sub">Connect with me for a project or collaboration.</p>
-          </div>
-
-          <div className="gh-issue-layout">
-            <div className="gh-issue-avatar">
-              <svg aria-hidden="true" height="40" viewBox="0 0 16 16" version="1.1" width="40" data-view-component="true" style={{ color: "var(--text-muted)" }}>
-                  <path fillRule="evenodd" d="M10.561 8.073a6.005 6.005 0 013.432 5.142.75.75 0 11-1.498.07 4.5 4.5 0 00-8.99 0 .75.75 0 01-1.498-.07 6.004 6.004 0 013.431-5.142 3.999 3.999 0 115.123 0zM10.5 5a2.5 2.5 0 10-5 0 2.5 2.5 0 005 0z" fill="currentColor"></path>
-              </svg>
+          <div className="contact-layout">
+            <div className="contact-info">
+              <h3 className="contact-heading">Let's build something together.</h3>
+              <p className="contact-sub">
+                Feel free to reach out for collaborations, opportunities, or just a quick chat. 
+                I'm always open to discussing new projects and ideas.
+              </p>
+              
+              <div className="social-links">
+                <a href={info.linkedin} target="_blank" rel="noreferrer" className="social-link">
+                  <LinkedinIcon size={20} />
+                  <span>LinkedIn</span>
+                </a>
+                <a href={`mailto:${info.email}`} className="social-link">
+                  <Mail size={20} />
+                  <span>Email Me</span>
+                </a>
+              </div>
             </div>
             
-            <div className="gh-issue-box">
-              <div className="gh-issue-input-group">
+            <div className="contact-form">
+              <div className="input-group">
                 <input 
                   type="text" 
-                  className="gh-input-title" 
-                  placeholder="Title" 
+                  className="input-field" 
+                  placeholder="Subject" 
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
                 />
               </div>
 
-              <div className="gh-issue-body-group">
-                <div className="gh-tab-nav">
-                  <button className="gh-tab active">Write</button>
-                  <button className="gh-tab">Preview</button>
-                </div>
-                
-                <div className="gh-textarea-wrapper">
-                  <textarea 
-                    className="gh-textarea" 
-                    placeholder="Leave a comment"
-                    value={body}
-                    onChange={(e) => setBody(e.target.value)}
-                  />
-                  <div className="gh-textarea-footer">
-                    <span>Markdown is supported</span>
-                  </div>
-                </div>
+              <div className="input-group">
+                <textarea 
+                  className="input-field textarea-field" 
+                  placeholder="Your message..."
+                  value={body}
+                  onChange={(e) => setBody(e.target.value)}
+                  rows={5}
+                />
               </div>
 
-              <div className="gh-issue-actions">
-                <a href={info.linkedin} target="_blank" rel="noreferrer" className="btn-secondary">View LinkedIn</a>
-                <button onClick={handleMailTo} className="btn-primary">Submit new issue</button>
+              <div className="form-actions">
+                <button onClick={handleMailTo} className="btn-primary form-submit">
+                  <Send size={18} />
+                  <span>Send Message</span>
+                </button>
               </div>
             </div>
           </div>

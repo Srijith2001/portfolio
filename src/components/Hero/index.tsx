@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { Building2, Zap, Rocket, Cpu, MessageSquare } from 'lucide-react';
 import { resumeData } from '../../resumeData';
 import profileImage from '/profile.png';
 import './Hero.css';
@@ -15,28 +16,33 @@ const Hero = () => {
             transition={{ duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
           >
             <h1 className="hero-name">
-              Hi there, I'm Srijith <span className="wave">👋</span>
+              Hi there, I'm Srijith <span className="hello-accent">👋</span>
             </h1>
 
             <p className="hero-subtitle">
               {resumeData.personalInfo.summary.split('. ')[0] + '.'}
             </p>
 
-            <div className="github-readme-stats">
+            <div className="hero-stats">
               <div className="stat-item">
-                <span className="stat-icon">🏢</span> I’m currently building retail mobile platforms & microservices at <strong>Swiggy</strong>
+                <Building2 className="stat-icon" size={20} />
+                <span>I’m currently building retail mobile platforms & microservices at <strong>Swiggy</strong></span>
               </div>
               <div className="stat-item">
-                <span className="stat-icon">⚡</span> I specialize in <strong>React,</strong> <strong>React Native (Expo)</strong> and <strong>Golang</strong>
+                <Zap className="stat-icon" size={20} />
+                <span>I specialize in <strong>React, React Native (Expo)</strong> and <strong>Golang</strong></span>
               </div>
               <div className="stat-item">
-                <span className="stat-icon">🔭</span> I have a proven track record of migrating legacy systems to microservices
+                <Rocket className="stat-icon" size={20} />
+                <span>I have a proven track record of migrating legacy systems to microservices</span>
               </div>
               <div className="stat-item">
-                <span className="stat-icon">🌱</span> I focus on high-throughput data using <strong>Kafka</strong> and <strong>Redis</strong>
+                <Cpu className="stat-icon" size={20} />
+                <span>I focus on high-throughput data using <strong>Kafka</strong> and <strong>Redis</strong></span>
               </div>
               <div className="stat-item">
-                <span className="stat-icon">💬</span> Ask me about mobile architecture, Golang, and performance optimization.
+                <MessageSquare className="stat-icon" size={20} />
+                <span>Ask me about mobile architecture, Golang, and performance optimization.</span>
               </div>
             </div>
 
@@ -54,13 +60,12 @@ const Hero = () => {
           >
             <div className="hero-avatar-wrapper">
               <img src={profileImage} alt="Srijith Bharadwaj D" className="hero-profile-image" />
-              <div className="hero-status-circle"></div>
+              <div className="hero-status-circle">
+                <Rocket size={18} strokeWidth={2.5} />
+              </div>
             </div>
           </motion.div>
         </div>
-
-        {/* Decorative glow */}
-        <div className="hero-glow" />
       </div>
     </section>
   );
