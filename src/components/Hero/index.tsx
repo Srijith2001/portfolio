@@ -30,7 +30,7 @@ const Hero = () => {
               </div>
               <div className="stat-item">
                 <Zap className="stat-icon" size={20} />
-                <span>I specialize in <strong>React, React Native (Expo)</strong> and <strong>Golang</strong></span>
+                <span>I specialize in <strong>React, React Native</strong> and <strong>Golang</strong></span>
               </div>
               <div className="stat-item">
                 <Rocket className="stat-icon" size={20} />
